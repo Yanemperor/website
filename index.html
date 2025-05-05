@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App 跳转</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>正在为您跳转到应用商店…</h2>
+  <p>如果没有自动跳转，请点击下面链接：</p>
+  <div id="manual-link"></div>
+
+  <script>
+    const iosUrl = "https://apps.apple.com/app/id123456789"; // 替换为你的 iOS 应用链接
+    const androidUrl = "https://play.google.com/store/apps/details?id=com.example.app"; // 替换为你的 Android 应用链接
+
+    const ua = navigator.userAgent.toLowerCase();
+    let targetUrl = "";
+
+    if (/iphone|ipad|ipod/.test(ua)) {
+      targetUrl = iosUrl;
+    } else if (/android/.test(ua)) {
+      targetUrl = androidUrl;
+    }
+
+    if (targetUrl) {
+      window.location.href = targetUrl;
+    } else {
+      document.getElementById("manual-link").innerHTML =
+        '<p><a href="' + iosUrl + '" target="_blank">前往 iOS 应用商店</a></p>' +
+        '<p><a href="' + androidUrl + '" target="_blank">前往 Android 应用商店</a></p>';
+    }
+  </script>
+</body>
+</html>
